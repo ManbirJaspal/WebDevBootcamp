@@ -9,4 +9,4 @@ request("https://query.yahooapis.com/v1/public/yql?q=select%20astronomy.sunset%2
             console.log(parsedData["query"]["results"]["channel"]["astronomy"]["sunset"]);
         }
     }
-});
+});   
