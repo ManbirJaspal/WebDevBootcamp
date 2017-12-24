@@ -10,6 +10,16 @@ app.get("/fallinlovewith/:thing", function(req, res){
    res.render("love.ejs", {thingVar: thing});
 });
 
+app.get("/posts", function(req, res){
+    var posts = [
+        { title: "Post 1", author: "Susy" },
+        { title: "Puppiessss", author: "Manbir" },
+        { title: "Tattiesssss", author: "Sahib" }
+        ];
+        
+        res.render("posts.ejs", {posts: posts});
+});
+
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("Server is running!!");
 });
