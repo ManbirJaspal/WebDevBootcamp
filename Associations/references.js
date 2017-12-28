@@ -13,67 +13,39 @@ var postSchema = new mongoose.Schema({
 var userSchema = new mongoose.Schema({
     email: String,
     name: String,
-    posts: [postSchema]    //it has to be the schema name
+    posts: [                //here its an array of object ids
+        {
+            type: mongoose.Schema.Types.ObjectId, //syntax of mongoose object id
+            ref: Post                               // belonging to a post
+        }
+    ]
 });
 var User = mongoose.model("User", userSchema);
 
-var newUser = new User({
-    email:"hermione@hogwarts.edu",
-    name: "Hermione Granger"
-});
+// Post.create({
+//   title: "How to cook the best burger pt. 3",
+//   content: "AKLSJDLAKSJD"
+// }, function(err, post){
+//     User.findOne({email: "manb@gamil.com"}, function(err, foundUser){
+//         if(err){
+//             console.log(err);
+//         } else {
+//             foundUser.posts.push(post);
+//             foundUser.save(function(err, data){
+//                 if(err){
+//                     console.log(err);
+//                 } else {
+//                     console.log(data);
+//                 }
+//             });
+//         }
+//     });
+// });
 
-newUser.posts.push({
-    title:"how to love ron wiesley",
-    content: "Go to Sex ED class!"
-});
-
-newUser.save(function(err, user){
-    if(err) {
-        console.log(err);
-    } else {
-        console.log(user);
-    }
-})
-
-var newUser = new User({
-    email:"charlie@brown.edu",
-    name: "Charlie Brown"
-});
-newUser.save(function(err, user){
+User.findOne({email: "manb@gamil.com"}).populate("posts").exec(function(err, user){
     if(err){
         console.log(err);
     } else {
         console.log(user);
-    }
-});
-
-var newPost = new Post({
-    title: "Reflections on apples",
-    content: "They are delicious"
-});
-
-newPost.save(function(err, post){
-    if(err) {
-        console.log(err);
-    } else {
-        console.log(post);
-    }
-});
-
-User.findOne({name: "Hermione Granger"}, function(err, user){  //after finding the data, it is stored in user variable in this function.
-    if(err){
-        console.log(err);
-    } else {
-        user.posts.push({                                       // then the new information is pushed into the posts array of user.
-            title: "3  things i love",
-            content: "pussy, pussy and pussy"
-        });
-        user.save(function(err, user){                          //after pushing we need to store it in the database
-            if(err){
-                console.log(err);
-            } else {
-                console.log(user);
-            }
-        });
     }
 });

@@ -68,7 +68,7 @@ User.findOne({name: "Hermione Granger"}, function(err, user){  //after finding t
             title: "3  things i love",
             content: "pussy, pussy and pussy"
         });
-        user.save(function(err, user){                          //after pushing we need to store it in the databas
+        user.save(function(err, user){                          //after pushing we need to store it in the database
             if(err){
                 console.log(err);
             } else {
