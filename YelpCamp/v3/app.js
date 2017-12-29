@@ -3,9 +3,10 @@ var express             = require("express"),
      bodyParser         = require("body-parser"),
      mongoose           = require("mongoose"),
      Campground         = require("./models/campground");
+     seedDB             = require("./seeds");
      
-
-mongoose.connect("mongodb://localhost/yelp_camp");
+seedDB();
+mongoose.connect("mongodb://localhost/yelp_camp_v3");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
@@ -57,7 +58,7 @@ app.post("/campgrounds", function(req, res){
         if(err){
             console.log(err);
         } else{
-             //redirect to campgronf page
+             //redirect to campgronund page
             res.redirect("/campgrounds");
         }
     });
@@ -72,10 +73,11 @@ app.get("/campgrounds/new", function(req, res) {
 //SHOW - shows more info about one campground
 app.get("/campgrounds/:id", function(req, res) {
     //find the campground with provided ID
-    Campground.findById(req.params.id, function(err, foundCampground){
+    Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
        if(err){
            console.log(err);
        } else {
+           console.log(foundCampground);
            res.render("show", {campground: foundCampground});
        }
     });
