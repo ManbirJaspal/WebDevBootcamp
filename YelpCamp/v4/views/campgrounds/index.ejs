@@ -1,0 +1,31 @@
+<% include ../partials/header %>
+    
+ <div class="container">
+       <header class="jumbotron">
+            <h1>Welcome to YelpCamp!</h1>
+            <p>View our hand-picked campgrounds from all over the world</p>
+            <p>
+                <a class="btn btn-primary btn-lg" href="/campgrounds/new">Add New Campground</a>
+            </p>
+    
+    </header>
+     <div class="row text-center" style="display:flex; flex-wrap: wrap;"> <!-- using this style displayes images correctly no matter thier difference in size -->
+          <% campgrounds.forEach(function(camps){ %>
+            <div class="col-md-3 col-sm-6"> <!--if the page size is large, it will show small images of 3 units. and when its the small , it shows less images with larger size of  6units -->
+                <div class="thumbnail">  <!-- makes the images into thumbnails-->
+                    <img src="<%= camps.image %>">
+                    <div class="caption">
+                        <h4><%= camps.name %></h4>
+                    </div>
+                    <p>
+                        <a href="/campgrounds/<%= camps._id %>" class="btn btn-primary">More Info</a>
+                    </p>
+                </div>
+            </div>
+           <% }); %>
+     </div>
+ </div>
+   
+  
+    
+    <% include ../partials/footer %>
