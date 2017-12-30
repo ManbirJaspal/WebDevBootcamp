@@ -1,0 +1,1 @@
+db.collections.drop() - deletes all values from the table
