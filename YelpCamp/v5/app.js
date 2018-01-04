@@ -1,6 +1,6 @@
 var express             = require("express"),
      app                = express(),
-     bodyParser         = require("body-parser"),
+     bodyParser         = require("body-parser"),x
      mongoose           = require("mongoose"),
      Campground         = require("./models/campground"),
      Comment            = require("./models/comment"),
